@@ -41,6 +41,7 @@ Create a new user and assign sudo privileges.
 sudo adduser <username>
 sudo usermod -aG sudo <username>
 su <username>
+
 ![Alt text](./images/create-user.png)
 img 2.a
 
@@ -54,6 +55,7 @@ Move to the base directory, create a virtual environment, activate it, and insta
 python3 -m venv .env
 source .env/bin/activate
 pip install -r requirements.txt
+
 ![Alt text](./images/django.png)
 img 3.a
 
@@ -66,6 +68,7 @@ python3 manage.py createsuperuser
 ### d. Run the Django Application:
 Start the server.
 python3 manage.py runserver 0.0.0.0:8000
+
 ![Alt text](./images/django-run.png)
 img 3.b
 
@@ -98,6 +101,7 @@ docker tag <name-django>:latest
 ### c. Push Docker Image to ACR:
 Push the Docker image.
 docker push <acr_name>.azurecr.io/<name-django>:latest
+
 ![Alt text](./images/acr.png)
 img 5.a
 
@@ -109,6 +113,7 @@ az aks get-credentials --resource-group <rg_name> --name <aks_name>
 
 ### b. Deploy to AKS:
 Use the appropriate Kubernetes manifests to deploy and access the application.
+
 ![Alt text](./images/deployed.png)
 img 6.a
 
