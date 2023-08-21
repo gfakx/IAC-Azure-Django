@@ -1,4 +1,4 @@
-# Deploying a Django Application on Azure Kubernetes Service (AKS) usinf Terraform to setup the VM and AKS infrastructure
+# Deploying a Django Application on Azure Kubernetes Service (AKS) using Terraform to setup the VM and AKS infrastructure.
 
 ## Prerequisites:
 - Azure Subscription.
