@@ -1,0 +1,276 @@
+  {% load static %}
+  <!-- Document Wrapper
+	============================================= -->
+    <div id="wrapper" class="wrapper clearfix">
+        <header id="navbar-spy" class="header header-1 header-transparent header-fixed">
+            <nav id="primary-menu" class="navbar navbar-fixed-top">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                            data-target="#navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="logo" href="index.html">
+ 
+                        </a>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse pull-right" id="navbar-collapse-1">
+                        <ul class="nav navbar-nav nav-pos-center navbar-left">
+                            <!-- Home Menu -->
+                            <li class="active">
+                                <a href="{% url 'home' %}" >home</a>
+                            </li>
+                            
+                            <!-- li end -->
+
+
+
+
+                            <!-- Pages Menu-->
+                            <!-- <li class="has-dropdown">
+                                <a href="#" data-toggle="dropdown" class="dropdown-toggle menu-item">Pages</a>
+                                <ul class="dropdown-menu">
+                                    <li class="dropdown-submenu">
+                                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">agents</a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a href="agents.html">All Agents</a>
+                                            </li>
+                                            <li>
+                                                <a href="agent-profile.html">agent profile</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown-submenu">
+                                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">agencies</a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a href="agency-list.html">all agencies</a>
+                                            </li>
+                                            <li>
+                                                <a href="agency-profile.html">agency profile</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown-submenu">
+                                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">blog</a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a href="blog.html">blog Grid</a>
+                                            </li>
+                                            <li>
+                                                <a href="blog-sidebar-right.html">blog Grid Right </a>
+                                            </li>
+                                            <li>
+                                                <a href="blog-sidebar-left.html">blog Grid Left </a>
+                                            </li>
+                                            <li>
+                                                <a href="blog-single.html">blog single</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="page-about.html">page about</a></li>
+                                    <li><a href="page-contact.html">page contact</a></li>
+                                    <li><a href="page-faq.html">page FAQ</a></li>
+                                    <li><a href="page-404.html">page 404</a></li>
+                                </ul>
+                            </li> -->
+                            <!-- li end -->
+
+
+
+
+
+                            <!-- li end -->
+
+
+
+
+                            <!-- Properties Menu-->
+                            <li class="">
+                                <a href="{% url 'propertys' %}" >Properties</a>
+                               
+                            </li>
+                            <!-- li end -->
+
+
+
+                            <li><a href="{% url 'contact' %}">contact</a></li>
+
+                                                        <!-- Profile Menu-->
+                                                        {% if user.is_authenticated %}
+                                                        <li class="has-dropdown">
+                                                            <a href="{% url 'user_profile' %}" data-toggle="dropdown" class="dropdown-toggle menu-item">My Profile</a>
+                                                            <ul class="dropdown-menu">
+                                                                <li><a href="{% url 'user_profile' %}">user profile</a></li>
+                                                                <li><a href="{% url 'my_property' %}">my properties</a></li>
+                                                                <li><a href="{% url 'favourite_property' %}">favourite properties</a></li>
+                                                                <li><a href="{% url 'add_property' %}">add property</a></li>
+                                                            </ul>
+                                                        </li>
+                                                        {% else %}
+                                                        {% endif %}
+                        </ul>
+
+
+
+
+                        <!-- Module Signup  -->
+                        <!-- <div class="module module-login pull-left">
+                            <a class="btn-popup" data-toggle="modal" data-target="#signupModule">Login</a>
+                        </div> -->
+                        {% if user.is_authenticated %}
+                        <div class="module module-login pull-left">
+                            <a class="btn-popup" href="{% url 'user_logout' %}">Logout</a>
+                        </div>
+                {% else %}
+                <div class="module module-login pull-left">
+                    <a class="btn-popup" href="{% url 'account_login' %}">Login</a>
+                </div>
+                {% endif %}
+
+                        <!-- <div class="module module-login pull-left">
+    
+                            <div class="modal register-login-modal fade" tabindex="-1"  data-dismiss="modal" role="diog" id="signupModule">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <div class="row">
+                        
+                        
+                        
+                        
+                        
+
+                                    
+                                         <ul class="nav nav-tabs">
+                                            <li class="active" id="logintog"><a href="#login" data-toggle="tab">login</a>
+                                            </li>
+                                            <li id="signuptog"><a href="#signup" data-toggle="tab">signup</a>
+                                            </li>
+                                        </ul>
+                                       
+                                        <div class="tab-content">
+                                            <div class="tab-pane fade in active" id="login">
+                                                <div class="signup-form-container text-center">
+
+                                                    <form class="mb-0" >
+                                                        {% csrf_token %} 
+                                                        
+                                                        <input type="hidden" name="form_type" value="loginform">
+                                                        <a href="#" class="btn btn--facebook btn--block"><i
+                                                                class="fa fa-facebook-square"></i>Login with
+                                                            Facebook</a>
+                                                        <div class="or-text">
+                                                            <span>or</span>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <input type="email" class="form-control" name="user_email" id="user_email" placeholder="Email Address">
+                                                        </div>
+                                              
+                                                        <div class="form-group">
+                                                            <input type="password" class="form-control" name="user_password" id="user_password" placeholder="Password">
+                                                        </div>
+                                                       
+                                                        <div class="input-checkbox">
+                                                            <label class="label-checkbox">
+                                                                <span>Remember Me</span>
+                                                                <input type="checkbox">
+                                                                <span class="check-indicator"></span>
+                                                            </label>
+                                                        </div>
+                                                        <input type="button" id="signin" class="btn btn--primary btn--block" value="SignIn">
+
+
+                                                        <a href="#" class="forget-password">Forget your
+                                                            password?</a>
+                                                    </form>
+                                                   
+                                                </div>
+                                            
+                                            </div>
+                                            <div class="tab-pane" id="signup">
+                                                <form class="mb-0" >
+                                                    {% csrf_token %} 
+                                                    
+                                                    <a href="#" class="btn btn--facebook btn--block"><i
+                                                            class="fa fa-facebook-square"></i>Register with
+                                                        Facebook</a>
+                                                    <div class="or-text">
+                                                        <span>or</span>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" name="full-name"
+                                                            id="full-name" placeholder="Full Name">
+                                                    </div>
+                                                
+                                                    <div class="form-group">
+                                                        <input type="email" class="form-control"
+                                                            name="register-email" id="register-email"
+                                                            placeholder="Email Address">
+                                                    </div>
+                                             
+                                                    <div class="form-group">
+                                                        <input type="password" class="form-control"
+                                                            name="register-password" id="register-password"
+                                                            placeholder="Password">
+                                                    </div>
+                                                 
+                                                    <div class="input-checkbox">
+                                                        <label class="label-checkbox">
+                                                            <span>I agree with all <a href="#">Terms &
+                                                                    Conditions</a></span>
+                                                            <input type="checkbox">
+                                                            <span class="check-indicator"></span>
+                                                        </label>
+                                                    </div>
+                                                    <input type="button" id="register" class="btn btn--primary btn--block" value="Register">
+                                                </form>
+                  
+                                            </div>
+                
+                                        </div>
+                        
+                        
+                        
+                               
+                                            </div>
+                                        </div>
+                                       
+                                    </div>
+                               
+                                </div>
+                          
+                            </div>
+                        </div> -->
+                        
+
+                        
+                        
+
+
+
+
+                        <!-- Module Consultation  -->
+                        <div  class="module module-property pull-left">
+                            <a href="{% url 'add_property' %}" target="_self" class="btn"><i class="fa fa-plus"></i> add
+                                property</a>
+                        </div>
+                    </div>
+                    <!-- /.navbar-collapse -->
+                </div>
+                <!-- /.container-fluid -->
+            </nav>
+           
+
+
+  
+              
+  
+        </header>

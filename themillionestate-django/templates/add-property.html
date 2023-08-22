@@ -1,0 +1,630 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!--IE Compatibility Meta-->
+<meta name="author" content="Ashwin John Dibu" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content=" Add Property page of million estate site">
+<link href="assets/images/favicon/favicon.png" rel="icon">
+
+<!-- Fonts
+    ============================================= -->
+<link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i%7CPoppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
+
+
+
+<title> Add Property | TheMillionEstate</title>
+
+<link href="{% static 'adminassets/libs/switchery/switchery.min.css'%}" rel="stylesheet" type="text/css" />
+
+<style>
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 40px;
+        height: 20px;
+        background-color: rgba(0, 0, 0, 0.25);
+        border-radius: 20px;
+        transition: all 0.3s;
+      }
+      .switch::after {
+        content: '';
+        position: absolute;
+        width: 18px;
+        height: 18px;
+        border-radius:50%;
+        background-color: white;
+        top: 1px;
+        left: 1px;
+        transition: all 0.3s;
+      }
+      
+      .checkbox:checked + .switch::after {
+        left : 20px;
+      }
+      .checkbox:checked + .switch {
+        background-color: #7983ff;
+      }
+      .checkbox {
+        display : none;
+      }
+    
+</style>
+
+{% endblock %}
+
+{% block content %}
+<!-- Page Title #1
+============================================ -->
+<section id="page-title" class="page-title bg-overlay bg-overlay-dark2">
+    <div class="bg-section">
+        <img src="assets/images/page-titles/1.jpg" alt="Background" />
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3">
+                <div class="title title-1 text-center">
+                    <div class="title--content">
+                        <div class="title--heading">
+                            <h1>Add Property</h1>
+                        </div>
+                        <ol class="breadcrumb">
+                            <li><a href="#">Home</a></li>
+                            <li class="active">Add Property</li>
+                        </ol>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <!-- .title end -->
+            </div>
+            <!-- .col-md-12 end -->
+        </div>
+        <!-- .row end -->
+    </div>
+    <!-- .container end -->
+</section>
+<!-- #page-title end -->
+
+<!-- #Add Property
+============================================= -->
+<section id="add-property" class="add-property">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-5 col-md-4">
+                <div class="edit--profile-area">
+                    <ul class="edit--profile-links list-unstyled mb-0">
+                        <li><a href="{% url 'user_profile' %}">Edit Profile</a></li>
+                        <li><a href="{% url 'my_property' %}">My Properties</a></li>
+                        <li><a href="{% url 'favourite_property' %}">Favourite Properties</a></li>
+                        <li><a href="{% url 'add_property' %}" class="active">Add Property</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-7 col-md-8">
+
+
+                <!-- Form 1 -->
+
+                <form class="mb-0" method="post" action="" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-box">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <h4 class="form--title">Property Description</h4>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <label class="mb-2">Property For*</label>
+                                    <br />
+                                    {% if property_for %}
+                                    {% for property_fo in property_for %}
+                                    <div class="" style="display: contents;">
+                                        <input type="radio" id="property-for" value="{{property_fo.id}}"
+                                            name="property-for" checked>
+                                        <label for="inlineRadio1" style="margin-right: 24px;">For {{property_fo.property_for_name}}</label>
+                                    </div>
+                                    {% endfor %}
+                                    {% endif %}
+
+                                </div>
+                            </div>
+
+
+                            <div class="col-xs-12 col-sm-4 col-md-4">
+                                <div class="form-group">
+                                    <label for="select-type">Type*</label>
+                                    <div class="select--box">
+                                        <i class="fa fa-angle-down"></i>
+                                        <select id="select-type" name="property-type">
+                                            {% if property_type %}
+                                            {% for property_typ in property_type %}
+                                            <option value="{{property_typ.id}}">{{property_typ}}</option>
+                                            {% endfor %}
+                                            {% endif %}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- .col-md-4 end -->
+
+
+
+                            <div class="col-xs-12 col-sm-4 col-md-4">
+                                <div class="form-group">
+                                    <label for="select-city">City*</label>
+                                    <div class="select--box">
+                                        <i class="fa fa-angle-down"></i>
+                                        <select id="select-status" name="city">
+                                            {% if city %}
+                                            {% for citys in city %}
+                                            <option value="{{citys.id}}">{{citys}}</option>
+                                            {% endfor %}
+                                            {% endif %}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- .col-md-4 end -->
+                            <div class="col-xs-12 col-sm-4 col-md-4">
+                                <div class="form-group">
+                                    <label for="location">Locality*</label>
+                                    <input type="text" class="form-control" id="locality" name="locality" placeholder="Enter location" required>
+                                </div>
+                            </div>
+                            <!-- .col-md-4 end -->
+                            <div class="col-xs-12 col-sm-4 col-md-4">
+                                <div class="form-group">
+                                    <label for="Bedrooms">Bedrooms*</label>
+                                    <input type="number" class="form-control" min="0" max="50"  name="bedroom" id="bedroom">
+                                </div>
+                            </div>
+                            <!-- .col-md-4 end -->
+                            <div class="col-xs-12 col-sm-4 col-md-4">
+                                <div class="form-group">
+                                    <label for="Bathrooms">Bathrooms*</label>
+                                    <input type="number" class="form-control "min="0" max="50"  name="bathroom" id="bathroom">
+                                </div>
+                            </div>
+                            <!-- .col-md-4 end -->
+                            <div class="col-xs-12 col-sm-4 col-md-4">
+                                <div class="form-group">
+                                    <label for="Floors">Balcony</label>
+                                    <input type="number" class="form-control" min="0" max="50"  name="balcony" id="balcony">
+                                </div>
+                            </div>
+                            <!-- .col-md-4 end -->
+                            <div class="col-xs-12 col-sm-4 col-md-4">
+                                <div class="form-group">
+                                    <label for="carpet-area">Carpet area sq.ft*</label>
+                                    <input type="number" min="0" class="form-control" id="carpet-area"  name="carpet_area" placeholder="sq ft" required>
+                                </div>
+                            </div>
+                            <!-- .col-md-4 end -->
+                            <div class="col-xs-12 col-sm-4 col-md-4">
+                                <div class="form-group">
+                                    <label for="builtup-area">Builtup area sq.ft</label>
+                                    <input type="number" min="0" class="form-control" id="builtup-area" name="builtup_area" placeholder="sq ft">
+
+                                </div>
+                            </div>
+                            <!-- .col-md-4 end -->
+                            <div class="col-xs-12 col-sm-4 col-md-4">
+                                <div class="form-group">
+                                    <label for="Superbuiltup-area">Superbuiltup area sq.ft</label>
+                                    <input type="number" min="0" class="form-control" id="superbuiltup-area" name="superbuiltup_area" placeholder="sq ft">
+
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-4 col-md-4">
+                                <div class="form-group">
+                                    <label for="floors">Floors</label>
+                                    <input type="number" min="0" max="500"  class="form-control" id="floor" name="floor" placeholder="Floors">
+                                </div>
+                            </div>
+                            <!-- .col-md-4 end -->
+                            <div class="col-xs-12 col-sm-4 col-md-4">
+                                <div class="form-group">
+                                    <label for="property age">Property Age</label>
+                                    <input type="number" min="0"  class="form-control" id="property-age" name="property_age" placeholder="year">
+                                </div>
+                            </div>
+                            <!-- .col-md-4 end -->
+                            <div class="col-xs-12 col-sm-4 col-md-4">
+                                <div class="form-group">
+                                    <label for="parking">Parking</label>
+                                    <input type="number" min="0" max="100" class="form-control" id="parking" name="parking">
+                                </div>
+                            </div>
+                            <!-- .col-md-4 end -->
+
+
+
+                            <!-- <div class="col-xs-12 col-sm-4 col-md-4">
+                                <div class="form-group">
+                                    <label for="Video-URL">Video URL</label>
+                                    <input type="text" class="form-control" name="Video-URL" id="Video-URL"
+                                        placeholder="Youtube, Vimeo, Dailymotion, etc..">
+                                </div>
+                            </div> -->
+
+
+                            
+                            <!-- .col-md-4 end -->
+
+                        
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <label for="property-description">Property Description*</label>
+                                    <textarea class="form-control" id="description" name="description" rows="2"></textarea>
+                                </div>
+                            </div>
+                            <!-- .col-md-12 end -->
+
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
+
+
+                                    <label for="property-price">Price*:</label>
+                                    <input type="number" min="0"  class="form-control" id="price" name="property_price" placeholder="Enter Price here" data-action="convert-to-words" data-target="price-someId" required >
+
+                                     <div class="" data-attrib="price-someId"></div>
+                                        <div id="amtwords" class="words"></div>
+                                </div>
+                            </div>
+
+
+                            
+                            <div class="col-xs-12 col-sm-4 col-md-4">
+                                <div class="form-group">
+                                    <label for="furnishing-type">Furnishing Type:</label>
+                                    <select class="form-control" name="furnishing_status" id="furnishing-status">
+                                        {% if furnishing_status %}
+                                        {% for furnishing in furnishing_status %}
+                                        <option value="{{furnishing}}">{{furnishing}}</option>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- .col-md-4 end -->
+                            <div class="col-xs-12 col-sm-4 col-md-4">
+                                <div class="form-group">
+                                    <label for="Square-ft">Available For:</label>
+                                    <select class="form-control" name="available_for" id="available-for">
+                                        {% if available_for %}
+                                        {% for available_fo in available_for %}
+                                        <option value="{{available_fo}}">{{available_fo}}</option>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- .col-md-4 end -->
+                            <div class="col-xs-12 col-sm-4 col-md-4">
+                                <div class="form-group">
+                                    <label for="car-parking">Property Status* :</label>
+                                    <select class="form-control" name="property_status" id="property-status">
+                                        {% if property_status %}
+                                        {% for property_statu in property_status %}
+                                        <option value="{{property_statu}}">{{property_statu}}</option>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- .col-md-4 end -->
+
+
+
+                        
+                        <!-- .row end -->
+                    </div>
+                    <!-- .form-box end -->
+                    <div class="form-box">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <h4 class="form--title">Property Features</h4>
+                            </div>
+
+
+                            <div class="row">
+
+
+                            
+                            <div class="col-6 col-lg-4">
+                                                    
+                                <div class="  mb-3">
+                                    {{features_form.swimming_pool}}
+                                    
+                                    <label for="" class=" mb-0">
+                                        Swimming pool
+                                    </label>
+                                </div>
+                                <div class="  mb-3">
+                                    {{features_form.visitor_parking}}
+                                    
+                                    <label for="" class=" mb-0">
+                                        Visitor Parking
+                                    </label>
+                                </div>
+                                <div class="  mb-3">
+                                    {{features_form.power_backup}}
+                                    
+                                    <label for="" class=" mb-0">
+                                        Power Backup
+                                    </label>
+                                </div>
+                                <div class="  mb-3">
+                                    {{features_form.security_firealarm}}
+                                    
+                                    <label for="" class=" mb-0">
+                                        Security Firealarm
+                                    </label>
+                                </div>
+                                <div class="  mb-3">
+                                    {{features_form.lift}}
+                                    
+                                    <label for="" class=" mb-0">
+                                        Lift
+                                    </label>
+                                </div>
+                                <div class="  mb-3">
+                                    {{features_form.fitness_centre}}
+                                    
+                                    <label for="" class=" mb-0">
+                                        Fitness Centre
+                                    </label>
+                                </div>
+                                <div class="  mb-3">
+                                    {{features_form.childrens_park}}
+                                    
+                                    <label for="" class=" mb-0">
+                                        Childrens Park
+                                    </label>
+                                </div>
+                                <div class="  mb-3">
+                                    {{features_form.club_house}}
+                                    
+                                    <label for="" class=" mb-0">
+                                        Club House
+                                    </label>
+                                </div>
+                            </div>
+                            <!-- .col-md-12 end -->
+
+
+                            <div class="col-6 col-lg-4">
+                                <div class="  mb-3">
+                                    {{features_form.multipurpose_room}}
+                                    
+                                    <label for="" class=" mb-0">
+                                        Multipurpose Room
+                                    </label>
+                                </div>
+                                <div class="  mb-3">
+                                    {{features_form.sports_facility}}
+                                    
+                                    <label for="" class=" mb-0">
+                                        Sports Facility
+                                    </label>
+                                </div>
+                                <div class="  mb-3">
+                                    {{features_form.rain_water_harvesting}}
+                                    
+                                    <label for="" class=" mb-0">
+                                        Rain Water Harvesting
+                                    </label>
+                                </div>
+                                <div class="  mb-3">
+                                    {{features_form.intercom}}
+                                    
+                                    <label for="" class=" mb-0">
+                                        Intercom
+                                    </label>
+                                </div>
+                                <div class="  mb-3">
+                                    {{features_form.maintenance_staff}}
+                                    
+                                    <label for="" class=" mb-0">
+                                        Maintenance Staff                                                        </label>
+                                </div>
+                                <div class="  mb-3">
+                                    {{features_form.water_purifier}}
+                                    
+                                    <label for="" class=" mb-0">
+                                        Water Purifier
+                                    </label>
+                                </div>
+                                <div class="  mb-3">
+                                    {{features_form.vaastu_compliant}}
+                                    
+                                    <label for="" class=" mb-0">
+                                        Vaastu Compliant
+                                    </label>
+                                </div>
+                                <div class="  mb-3">
+                                    {{features_form.natural_light}}
+                                    
+                                    <label for="" class=" mb-0">
+                                        Natural Light                                                        </label>
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-6 col-lg-4">
+                                <div class="  mb-3">
+                                    {{features_form.wifi_connectivity}}
+                                    
+                                    <label for="" class=" mb-0">
+                                        Wifi Connectivity                                                        </label>
+                                </div>
+                                <div class="  mb-3">
+                                    {{features_form.shopping_centre}}
+                                    
+                                    <label for="" class=" mb-0">
+                                        Shopping Centre                                                        </label>
+                                </div>
+                                <div class="  mb-3">
+                                    {{features_form.atm}}
+                                    
+                                    <label for="" class=" mb-0">
+                                        Atm
+                                    </label>
+                                </div>
+                                <div class="  mb-3">
+                                    {{features_form.waste_disposal}}
+                                    
+                                    <label for="" class=" mb-0">
+                                        Waste Disposal
+                                    </label>
+                                </div>
+                                <div class="  mb-3">
+                                    {{features_form.piped_gas}}
+                                    
+                                    <label for="" class=" mb-0">
+                                        Piped Gas                                                        </label>
+                                </div>
+                                
+                            </div>
+
+                        </div>
+
+
+
+                        </div>
+                        <!-- .row end -->
+                    </div>
+                    <!-- .form-box end -->
+
+                    <div class="form-box">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <h4 class="form--title">Property Gallery</h4>
+                            </div>
+                            <!-- .col-md-12 end -->
+                            <div class="col-xs-12 col-sm-4 col-md-12">
+                                <label>Featured Images</label>
+                                <div class="form-group mb-4">
+                                <input type="file" class="" name="featured_image" required>
+                                </div>
+                            </div>
+
+
+                            <div class="col-xs-12 col-sm-4 col-md-12 " style="margin-top: 50px;">
+                                
+                                    <label>Upload Multiple Image</label>
+                                    <div class="input-group mb-3">
+
+                                        <input type="file" multiple class="form-control" id="inputGroupFile01" name="image">
+                                    </div>
+    
+                                
+                            </div>
+
+
+                            <div class="col-xs-12 col-sm-4 col-md-12 " style="margin-top: 50px;">
+
+                                <div>
+                                    <label style="size: 70px;" class="">Publish </label>
+                                    <div>
+                                        <input type="checkbox" id="toggle" value="publish" name="publish" class="checkbox" />  
+                                        <label for="toggle" class="switch"></label>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                           
+                            <!-- .col-md-12 end -->
+
+                        </div>
+                        <!-- .row end -->
+                    </div>
+
+                    <input type="submit" value="Save Edits" name="submit" class="btn btn--primary">
+                </form>
+            </div>
+       
+        </div>
+        <!-- .row end -->
+    </div>
+</section>
+<!-- #social-profile  end -->
+
+<!-- cta #1
+============================================= -->
+<section id="cta" class="cta cta-1 text-center bg-overlay bg-overlay-dark pt-90">
+    <div class="bg-section"><img src="assets/images/cta/bg-1.jpg" alt="Background"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3">
+                <h3>Join our professional team & agents to start selling your house</h3>
+                <a href="#" class="btn btn--primary">Contact</a>
+            </div>
+            <!-- .col-md-6 -->
+        </div>
+        <!-- .row -->
+    </div>
+    <!-- .container -->
+</section>
+
+<script>
+    {% for msg in messages %}
+        swal('{{msg}}')
+    {% endfor %}
+   </script>
+
+<script>
+
+    // ==========================================================================
+// Function Declaration :: Convert Numbers to Words :: Indian Format
+// ==========================================================================
+
+function convertNumberToWords(num) {
+var ones = ["", "One ", "Two ", "Three ", "Four ", "Five ", "Six ", "Seven ", "Eight ", "Nine ", "Ten ", "Eleven ", "Twelve ", "Thirteen ", "Fourteen ", "Fifteen ", "Sixteen ", "Seventeen ", "Eighteen ", "Nineteen "];
+var tens = ["", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"];
+if ((num = num.toString()).length > 9) return "Overflow: Maximum 9 digits supported";
+n = ("000000000" + num).substr(-9).match(/^(\d{2})(\d{2})(\d{2})(\d{1})(\d{2})$/);
+if (!n) return;
+var str = "";
+str += n[1] != 0 ? (ones[Number(n[1])] || tens[n[1][0]] + " " + ones[n[1][1]]) + "Crore " : "";
+str += n[2] != 0 ? (ones[Number(n[2])] || tens[n[2][0]] + " " + ones[n[2][1]]) + "Lakh " : "";
+str += n[3] != 0 ? (ones[Number(n[3])] || tens[n[3][0]] + " " + ones[n[3][1]]) + "Thousand " : "";
+str += n[4] != 0 ? (ones[Number(n[4])] || tens[n[4][0]] + " " + ones[n[4][1]]) + "Hundred " : "";
+str += n[5] != 0 ? (str != "" ? "and " : "") + (ones[Number(n[5])] || tens[n[5][0]] + " " + ones[n[5][1]]) : "";
+return str;
+}
+
+// ==========================================================================
+// JS Implementation | Usage
+// ==========================================================================
+
+
+$('body').on('keyup change blur input', '[data-action=convert-to-words]', function() {
+var $this = $(this);
+var target = $this.data('target');
+var amt = $this.val();
+var words = convertNumberToWords(amt);
+$('[data-attrib="'+target+'"]').text(words);
+});
+
+
+
+</script>
+
+<script src="{% static 'adminassets/libs/switchery/switchery.min.js'%}"></script>
+
+<script src="{% static 'main/js/dropzone.js'%}"></script>
+<script src="{% static 'main/js/jquery-2.2.4.min.js'%}"></script>
+<script src="{% static 'main/js/plugins.js'%}"></script>
+<script src="{% static 'main/js/functions.js'%}"></script>
+{% endblock %}
