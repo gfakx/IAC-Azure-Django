@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: django-container
-        image: gfakxacr.azurecr.io/themilliones-django:latest
+        image: name.azurecr.io/themilliones-django:latest
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8000

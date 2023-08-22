@@ -29,7 +29,7 @@ From  the Azure portal , follow on screen instruction to ssh into the vm.
 
 ### b. Update and Upgrade the VM:
 Update the package list and upgrade the packages.   
-'sudo apt-get update' && 'sudo apt-get upgrade'
+`sudo apt-get update' && 'sudo apt-get upgrade`
 
 ### c. Use Provided Script to Install Necessary Tools:
 Copy the `django-install.sh` script to the VM, ensure it's executable and run it.  
