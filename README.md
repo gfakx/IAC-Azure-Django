@@ -92,18 +92,21 @@ Run the container locally.
 Login to Azure and the ACR. ( Follow on-screen instruction on your Azure ACR page )  
 `az login`  
 `az acr login --name acr_name`  
+`docker login acr_name.azurecr.io`
 
 ### b. Tag Docker Image for ACR:
 Tag the Docker image.  
 `docker tag name-django:latest`    
-`acr_name.azurecr.io/name-django:latest`
+`acr_name.azurecr.io/name-django:latest`  
+![Alt text](./images/docker-push.png)
+img 5.a
 
 ### c. Push Docker Image to ACR:
 Push the Docker image.  
 `docker push acr_name.azurecr.io/name-django:latest`
 
 ![Alt text](./images/acr.png)
-img 5.a
+img 5.b
 
 ## 6. Deploy to Azure Kubernetes Service:
 
