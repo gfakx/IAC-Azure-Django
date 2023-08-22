@@ -1,4 +1,4 @@
-# Deploying a Django Application on Azure Kubernetes Service (AKS) using Terraform to setup the VM and AKS infrastructure.
+# Deploying a Django Application on Azure Kubernetes Service (AKS) using Terraform to setup the VM and AKS & ACR  infrastructure.
 
 ## Prerequisites:
 - Azure Subscription.
@@ -11,11 +11,11 @@
 ### a. Azure Virtual Machine:
 - Clone Source Repo :  git clone https://github.com/gfakx/IAC-Azure-Django.git
 - cd into the root folder 
-- Create a .tfvars and provide values and credentials to declared variables. (See image 1.a below for refference )
+- Create a .tfvars and provide values and credentials to declared variables. (See image 1.a below for reference )
 - Apply the Terraform configuration: `terraform init` , `terraform fmt`, `terraform validate`, `terraform plan`, `terraform apply`
    
 
-### b. Azure Kubernetes Service (AKS):
+### b. Azure Kubernetes Service (AKS) & Azure Container Registry (ACR):
 - Same as 1.a
 
 
@@ -112,7 +112,11 @@ Get AKS credentials.
 'az aks get-credentials --resource-group rg_name --name aks_name'
 
 ### b. Deploy to AKS:
-Use the appropriate Kubernetes manifests to deploy and access the application.
+Use the appropriate Kubernetes manifests to deploy and access the application.  
+'kubectl apply -f deployment.yml'  
+'kubectl get nodes'  
+'kubectl get pods'  
+'kubectl get svc'  
 
 ![Alt text](./images/deployed.png)
 img 6.a
